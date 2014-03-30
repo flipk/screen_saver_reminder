@@ -121,7 +121,7 @@ namespace ScreenSaverReminder {
 			this->Name = L"AboutForm";
 			this->ShowInTaskbar = false;
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-			this->Text = L"AboutForm";
+			this->Text = L"About Screen Saver Reminder";
 			this->TopMost = true;
 			this->ResumeLayout(false);
 			this->PerformLayout();
