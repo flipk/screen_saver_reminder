@@ -252,6 +252,20 @@
 				</File>
 			</File>
 			<File
+				RelativePath=".\AnnoyingForm.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\AnnoyingForm.h"
+				FileType="3"
+				>
+				<File
+					RelativePath=".\AnnoyingForm.resx"
+					SubType="Designer"
+					>
+				</File>
+			</File>
+			<File
 				RelativePath=".\Form1.h"
 				FileType="3"
 				>

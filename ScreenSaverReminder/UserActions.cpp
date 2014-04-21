@@ -1,6 +1,7 @@
 
 #include "stdafx.h"
 #include "Form1.h"
+#include "AnnoyingForm.h"
 #include "Registry.h"
 
 using namespace System::Runtime::InteropServices; 
@@ -82,7 +83,16 @@ Form1::updateNotifyIcon(void)
 	int v = this->currentTimerValue;
 	int m8 = this->resetTimerValue / 8;
 	System::Drawing::Icon ^ ico = this->ico0;
-	if (v < 120)
+	bool showAnnoyingForm = false;
+	if (v < 60)
+	{
+		showAnnoyingForm = true;
+		if ((v & 1) == 0)
+			ico = this->ico8;
+		else
+			ico = this->ico0;
+	}
+	else if (v < 120)
 	{
 		if ((v & 1) == 0)
 			ico = this->ico8;
@@ -104,4 +114,20 @@ Form1::updateNotifyIcon(void)
 	else if (v <= (m8*7))
 		ico = this->ico1;
 	this->notifyIcon1->Icon = ico;
+	if (showAnnoyingForm)
+	{
+		if (annoyingFormShown == false)
+		{
+			annoyingFormShown = true;
+			annoyingForm->Show();
+		}
+		annoyingForm->annoyingFormToggle();
+	}
+	else
+	{
+		if (annoyingFormShown == true)
+		{
+			annoyingForm->Hide();
+		}
+	}
 }

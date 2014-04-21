@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AboutForm.h"
+#include "AnnoyingForm.h"
 #include "Registry.h"
 
 namespace ScreenSaverReminder {
@@ -49,6 +50,8 @@ namespace ScreenSaverReminder {
 			this->ico8 = cli::safe_cast<System::Drawing::Icon^>(mgr->GetObject("Icon8"));
 
 			aboutForm = gcnew AboutForm;
+			annoyingForm = gcnew AnnoyingForm;
+			annoyingFormShown = false;
 		}
 
 	protected:
@@ -76,6 +79,8 @@ namespace ScreenSaverReminder {
 		System::Drawing::Icon^ ico6;
 		System::Drawing::Icon^ ico7;
 		AboutForm ^aboutForm;
+		AnnoyingForm ^annoyingForm;
+		bool annoyingFormShown;
 
 	private: System::Windows::Forms::Button^  aboutButton;
 
