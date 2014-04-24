@@ -127,6 +127,7 @@ Form1::updateNotifyIcon(void)
 	{
 		if (annoyingFormShown == true)
 		{
+			annoyingFormShown = false;
 			annoyingForm->Hide();
 		}
 	}
