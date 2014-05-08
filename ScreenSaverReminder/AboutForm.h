@@ -85,7 +85,7 @@ namespace ScreenSaverReminder {
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(256, 13);
 			this->label1->TabIndex = 1;
-			this->label1->Text = L"Screen Saver Reminder v3 by Phillip Francis Knaack";
+			this->label1->Text = L"Screen Saver Reminder v4 by Phillip Francis Knaack";
 			// 
 			// label2
 			// 

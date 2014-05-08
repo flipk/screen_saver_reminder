@@ -120,6 +120,7 @@ Form1::updateNotifyIcon(void)
 		{
 			annoyingFormShown = true;
 			annoyingForm->Show();
+			annoyingForm->BringToFront();
 		}
 		annoyingForm->annoyingFormToggle();
 	}
