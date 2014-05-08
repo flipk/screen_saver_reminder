@@ -200,6 +200,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\AnnoyingForm.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\AssemblyInfo.cpp"
 				>
 			</File>
@@ -250,10 +254,6 @@
 					SubType="Designer"
 					>
 				</File>
-			</File>
-			<File
-				RelativePath=".\AnnoyingForm.cpp"
-				>
 			</File>
 			<File
 				RelativePath=".\AnnoyingForm.h"

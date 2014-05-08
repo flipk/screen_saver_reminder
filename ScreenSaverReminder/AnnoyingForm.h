@@ -25,10 +25,7 @@ namespace ScreenSaverReminder {
 		AnnoyingForm(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
-			isRed = false;
+			colorCounter = 0;
 		}
 
 	protected:
@@ -46,11 +43,12 @@ namespace ScreenSaverReminder {
 	protected: 
 	private: System::ComponentModel::IContainer^  components;
 
+
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		bool isRed;
+		int colorCounter;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -67,23 +65,19 @@ namespace ScreenSaverReminder {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::Control;
 			this->ClientSize = System::Drawing::Size(465, 403);
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"AnnoyingForm";
-			this->Text = L"AnnoyingForm";
+			this->ShowIcon = false;
+			this->ShowInTaskbar = false;
+			this->Text = L"PFK Screen Saver Reminder -- YOUR SCREEN SAVER IS ABOUT TO ACTIVATE";
+			this->TopMost = true;
+			this->WindowState = System::Windows::Forms::FormWindowState::Maximized;
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
 public:
-	System::Void annoyingFormToggle(void)
-	{
-		if (this->isRed)
-		{
-			this->BackColor = System::Drawing::SystemColors::Control;
-			isRed = false;
-		} else {
-			this->BackColor = System::Drawing::Color::Red;
-			isRed = true;
-		}
-	}
+	System::Void annoyingFormToggle(void);
 	};
 }

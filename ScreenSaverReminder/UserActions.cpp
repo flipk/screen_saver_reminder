@@ -84,7 +84,7 @@ Form1::updateNotifyIcon(void)
 	int m8 = this->resetTimerValue / 8;
 	System::Drawing::Icon ^ ico = this->ico0;
 	bool showAnnoyingForm = false;
-	if (v < 60)
+	if (v < 110)
 	{
 		showAnnoyingForm = true;
 		if ((v & 1) == 0)
@@ -120,7 +120,11 @@ Form1::updateNotifyIcon(void)
 		{
 			annoyingFormShown = true;
 			annoyingForm->Show();
+		}
+		else
+		{
 			annoyingForm->BringToFront();
+			annoyingForm->Activate();
 		}
 		annoyingForm->annoyingFormToggle();
 	}
