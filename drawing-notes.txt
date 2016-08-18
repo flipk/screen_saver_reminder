@@ -1,0 +1,33 @@
+
+System.Drawing.Bitmap
+http://msdn.microsoft.com/en-us/library/system.drawing.bitmap(VS.110).aspx
+    Bitmap(Int32, Int32)
+    SetPixel(Int32, Int32, Color)
+
+System.Drawing.Graphics
+http://msdn.microsoft.com/en-us/library/system.drawing.graphics(VS.110).aspx
+
+
+Graphics.DrawImage(Image, Int32, Int32)
+http://msdn.microsoft.com/en-us/library/558kfzex(VS.110).aspx
+
+Graphics.FromImage(Image)
+http://msdn.microsoft.com/en-us/library/system.drawing.graphics.fromimage(VS.110).aspx
+
+(Note, Image is a base class for Bitmap)
+
+Bitmap ^x = gcnew Bitmap(wid, hi);
+Graphics ^ g = Graphics::FromImage(x);
+g->FillRectangle(gcnew SolidBrush( Color::Black ), x, y, wid, hi);
+
+Color newColor = Color::FromArgb( r, g, b );   // r,g,b = 0-255
+Color newColor = Color::FromArgb( a, r, g, b );   // r,g,b = 0-255, a = 1-255
+x->SetPixel( x, y, newColor );
+
+System.Drawing.Color
+http://msdn.microsoft.com/en-us/library/system.drawing.color(VS.110).aspx
+
+System::Random
+https://msdn.microsoft.com/en-us/library/system.random(v=vs.110).aspx
+
+Random rand1 = new Random();

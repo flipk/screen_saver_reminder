@@ -7,6 +7,7 @@ using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
 
+#include "Registry.h"
 
 namespace ScreenSaverReminder {
 
@@ -26,7 +27,9 @@ namespace ScreenSaverReminder {
 		{
 			InitializeComponent();
 			colorCounter = 0;
+			rand = gcnew System::Random;
 		}
+	public: 
 
 	protected:
 		/// <summary>
@@ -40,15 +43,24 @@ namespace ScreenSaverReminder {
 			}
 		}
 
-	protected: 
-	private: System::ComponentModel::IContainer^  components;
-
-
 	private:
+		annoyingState_t state;
+		int colorCounter;
+		System::Drawing::Bitmap  ^fractalBitmap;
+		System::Random ^rand;
+
+
+
+
+		System::ComponentModel::IContainer^  components;
+		System::Windows::Forms::Timer^  fractalTimer;
+
+
+
+
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		int colorCounter;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -57,7 +69,14 @@ namespace ScreenSaverReminder {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
+			this->fractalTimer = (gcnew System::Windows::Forms::Timer(this->components));
 			this->SuspendLayout();
+			// 
+			// fractalTimer
+			// 
+			this->fractalTimer->Interval = 10;
+			this->fractalTimer->Tick += gcnew System::EventHandler(this, &AnnoyingForm::fractalTimer_Tick);
 			// 
 			// AnnoyingForm
 			// 
@@ -77,7 +96,14 @@ namespace ScreenSaverReminder {
 
 		}
 #pragma endregion
+
 public:
-	System::Void annoyingFormToggle(void);
+	System::Void start(void);
+	System::Void stop(void);
+	System::Void setAnnoyingState(annoyingState_t _state) {
+		state = _state;
+	}
+private:
+	System::Void fractalTimer_Tick(System::Object^  sender, System::EventArgs^  e);
 	};
 }

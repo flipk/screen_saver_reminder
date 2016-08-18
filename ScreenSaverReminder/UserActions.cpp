@@ -23,6 +23,8 @@ namespace SysWin32
 
 using namespace ScreenSaverReminder;
 
+
+
 System::Void
 Form1::notifyIconClicked(System::Object^  sender, System::EventArgs^  e)
 {
@@ -56,6 +58,27 @@ System::Void
 Form1::exitButtonClicked(System::Object^  sender, System::EventArgs^  e)
 {
 	Application::Exit();
+}
+
+System::Void
+Form1::radioColorsCheckChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	if (this->radioColors->Checked)
+		RegistrySetAnnoyState(ANNOY_COLORS);
+}
+
+System::Void
+Form1::radioFractalCheckChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	if (this->radioFractals->Checked)
+		RegistrySetAnnoyState(SHOW_FRACTALS);
+}
+
+System::Void
+Form1::radioPixelsCheckChanged(System::Object^  sender, System::EventArgs^  e)
+{
+	if (this->radioPixels->Checked)
+		RegistrySetAnnoyState(SHOW_PIXELS);
 }
 
 System::Void
@@ -119,21 +142,21 @@ Form1::updateNotifyIcon(void)
 		if (annoyingFormShown == false)
 		{
 			annoyingFormShown = true;
-			annoyingForm->Show();
+			annoyingForm->setAnnoyingState(RegistryGetAnnoyState());
+			annoyingForm->start();
 		}
 		else
 		{
 			annoyingForm->BringToFront();
 			annoyingForm->Activate();
 		}
-		annoyingForm->annoyingFormToggle();
 	}
 	else
 	{
 		if (annoyingFormShown == true)
 		{
 			annoyingFormShown = false;
-			annoyingForm->Hide();
+			annoyingForm->stop();
 		}
 	}
 }

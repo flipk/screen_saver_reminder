@@ -81,25 +81,25 @@ namespace ScreenSaverReminder {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(16, 39);
+			this->label1->Location = System::Drawing::Point(19, 39);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(256, 13);
 			this->label1->TabIndex = 1;
-			this->label1->Text = L"Screen Saver Reminder v4 by Phillip Francis Knaack";
+			this->label1->Text = L"Screen Saver Reminder v5 by Phillip Francis Knaack";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(77, 77);
+			this->label2->Location = System::Drawing::Point(114, 77);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(118, 13);
+			this->label2->Size = System::Drawing::Size(66, 13);
 			this->label2->TabIndex = 2;
-			this->label2->Text = L"pfk@phillipknaack.com";
+			this->label2->Text = L"pfk@pfk.org";
 			// 
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(70, 118);
+			this->label3->Location = System::Drawing::Point(81, 118);
 			this->label3->Name = L"label3";
 			this->label3->Size = System::Drawing::Size(133, 13);
 			this->label3->TabIndex = 3;
@@ -129,5 +129,6 @@ namespace ScreenSaverReminder {
 		}
 #pragma endregion
 	private: System::Void dismissButtonClicked(System::Object^  sender, System::EventArgs^  e);
+
 };
 }

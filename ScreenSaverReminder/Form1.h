@@ -52,6 +52,24 @@ namespace ScreenSaverReminder {
 			aboutForm = gcnew AboutForm;
 			annoyingForm = gcnew AnnoyingForm;
 			annoyingFormShown = false;
+			annoyingState_t aSt = RegistryGetAnnoyState();
+			switch (aSt) {
+				case ANNOY_COLORS:
+					this->radioColors->Checked   = true;
+					this->radioFractals->Checked = false;
+					this->radioPixels->Checked   = false;
+					break;
+				case SHOW_FRACTALS:
+					this->radioColors->Checked   = false;
+					this->radioFractals->Checked = true;
+					this->radioPixels->Checked   = false;
+					break;
+				case SHOW_PIXELS:
+					this->radioColors->Checked   = false;
+					this->radioFractals->Checked = false;
+					this->radioPixels->Checked   = true;
+					break;
+			}
 		}
 
 	protected:
@@ -83,6 +101,12 @@ namespace ScreenSaverReminder {
 		bool annoyingFormShown;
 
 	private: System::Windows::Forms::Button^  aboutButton;
+	private: System::Windows::Forms::RadioButton^  radioColors;
+	private: System::Windows::Forms::RadioButton^  radioFractals;
+	private: System::Windows::Forms::RadioButton^  radioPixels;
+
+
+
 
 			 System::Drawing::Icon^ ico8;
 		System::Void updateNotifyIcon(void);
@@ -116,13 +140,16 @@ namespace ScreenSaverReminder {
 			this->reminderDurationBox = (gcnew System::Windows::Forms::NumericUpDown());
 			this->exitButton = (gcnew System::Windows::Forms::Button());
 			this->aboutButton = (gcnew System::Windows::Forms::Button());
+			this->radioColors = (gcnew System::Windows::Forms::RadioButton());
+			this->radioFractals = (gcnew System::Windows::Forms::RadioButton());
+			this->radioPixels = (gcnew System::Windows::Forms::RadioButton());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^  >(this->reminderDurationBox))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(14, 17);
+			this->label1->Location = System::Drawing::Point(15, 61);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(140, 13);
 			this->label1->TabIndex = 1;
@@ -143,22 +170,22 @@ namespace ScreenSaverReminder {
 			// 
 			// hideButton1
 			// 
-			this->hideButton1->Location = System::Drawing::Point(94, 52);
+			this->hideButton1->Location = System::Drawing::Point(95, 94);
 			this->hideButton1->Name = L"hideButton1";
 			this->hideButton1->Size = System::Drawing::Size(75, 23);
-			this->hideButton1->TabIndex = 3;
+			this->hideButton1->TabIndex = 5;
 			this->hideButton1->Text = L"Hide";
 			this->hideButton1->UseVisualStyleBackColor = true;
 			this->hideButton1->Click += gcnew System::EventHandler(this, &Form1::hideButtonClicked);
 			// 
 			// reminderDurationBox
 			// 
-			this->reminderDurationBox->Location = System::Drawing::Point(179, 14);
+			this->reminderDurationBox->Location = System::Drawing::Point(180, 58);
 			this->reminderDurationBox->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) {60, 0, 0, 0});
 			this->reminderDurationBox->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) {1, 0, 0, 0});
 			this->reminderDurationBox->Name = L"reminderDurationBox";
 			this->reminderDurationBox->Size = System::Drawing::Size(61, 20);
-			this->reminderDurationBox->TabIndex = 2;
+			this->reminderDurationBox->TabIndex = 3;
 			this->reminderDurationBox->TextAlign = System::Windows::Forms::HorizontalAlignment::Right;
 			this->reminderDurationBox->ThousandsSeparator = true;
 			this->reminderDurationBox->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) {10, 0, 0, 0});
@@ -166,30 +193,71 @@ namespace ScreenSaverReminder {
 			// 
 			// exitButton
 			// 
-			this->exitButton->Location = System::Drawing::Point(175, 52);
+			this->exitButton->Location = System::Drawing::Point(176, 94);
 			this->exitButton->Name = L"exitButton";
 			this->exitButton->Size = System::Drawing::Size(75, 23);
-			this->exitButton->TabIndex = 4;
+			this->exitButton->TabIndex = 6;
 			this->exitButton->Text = L"Exit";
 			this->exitButton->UseVisualStyleBackColor = true;
 			this->exitButton->Click += gcnew System::EventHandler(this, &Form1::exitButtonClicked);
 			// 
 			// aboutButton
 			// 
-			this->aboutButton->Location = System::Drawing::Point(13, 52);
+			this->aboutButton->Location = System::Drawing::Point(14, 94);
 			this->aboutButton->Name = L"aboutButton";
 			this->aboutButton->Size = System::Drawing::Size(75, 23);
-			this->aboutButton->TabIndex = 5;
+			this->aboutButton->TabIndex = 4;
 			this->aboutButton->Text = L"About";
 			this->aboutButton->UseVisualStyleBackColor = true;
 			this->aboutButton->Click += gcnew System::EventHandler(this, &Form1::aboutButtonClicked);
+			// 
+			// radioColors
+			// 
+			this->radioColors->AutoSize = true;
+			this->radioColors->Checked = true;
+			this->radioColors->Location = System::Drawing::Point(43, 11);
+			this->radioColors->Name = L"radioColors";
+			this->radioColors->Size = System::Drawing::Size(99, 17);
+			this->radioColors->TabIndex = 1;
+			this->radioColors->TabStop = true;
+			this->radioColors->Tag = L"";
+			this->radioColors->Text = L"annoying colors";
+			this->radioColors->UseVisualStyleBackColor = true;
+			this->radioColors->CheckedChanged += gcnew System::EventHandler(this, &Form1::radioColorsCheckChanged);
+			// 
+			// radioFractals
+			// 
+			this->radioFractals->AutoSize = true;
+			this->radioFractals->Location = System::Drawing::Point(163, 11);
+			this->radioFractals->Name = L"radioFractals";
+			this->radioFractals->Size = System::Drawing::Size(59, 17);
+			this->radioFractals->TabIndex = 2;
+			this->radioFractals->Tag = L"";
+			this->radioFractals->Text = L"fractals";
+			this->radioFractals->UseVisualStyleBackColor = true;
+			this->radioFractals->CheckedChanged += gcnew System::EventHandler(this, &Form1::radioFractalCheckChanged);
+			// 
+			// radioPixels
+			// 
+			this->radioPixels->AutoSize = true;
+			this->radioPixels->Location = System::Drawing::Point(107, 34);
+			this->radioPixels->Name = L"radioPixels";
+			this->radioPixels->Size = System::Drawing::Size(51, 17);
+			this->radioPixels->TabIndex = 7;
+			this->radioPixels->TabStop = true;
+			this->radioPixels->Text = L"pixels";
+			this->radioPixels->UseVisualStyleBackColor = true;
+			this->radioPixels->CheckedChanged += gcnew System::EventHandler(this, &Form1::radioPixelsCheckChanged);
 			// 
 			// Form1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(260, 90);
+			this->ClientSize = System::Drawing::Size(265, 133);
 			this->ControlBox = false;
+			this->Controls->Add(this->radioPixels);
+			this->Controls->Add(this->radioFractals);
+			this->Controls->Add(this->radioColors);
 			this->Controls->Add(this->aboutButton);
 			this->Controls->Add(this->exitButton);
 			this->Controls->Add(this->reminderDurationBox);
@@ -216,5 +284,8 @@ private: System::Void reminderDurationChanged(System::Object^  sender, System::E
 private: System::Void exitButtonClicked(System::Object^  sender, System::EventArgs^  e);
 private: System::Void timerTicked(System::Object^  sender, System::EventArgs^  e);
 private: System::Void aboutButtonClicked(System::Object^  sender, System::EventArgs^  e);
+private: System::Void radioColorsCheckChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void radioFractalCheckChanged(System::Object^  sender, System::EventArgs^  e);
+private: System::Void radioPixelsCheckChanged(System::Object^  sender, System::EventArgs^  e);
 };
 }
