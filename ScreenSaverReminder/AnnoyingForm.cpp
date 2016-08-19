@@ -13,10 +13,10 @@ System::Void AnnoyingForm::start(void)
 			fractalTimer->Interval = 500;
 			break;
 		case SHOW_FRACTALS:
-			fractalTimer->Interval = 10;
+			fractalTimer->Interval = 100; // TODO
 			break;
 		case SHOW_PIXELS:
-			fractalTimer->Interval = 1;
+			fractalTimer->Interval = 100;
 			break;
 	}
 	fractalTimer->Enabled = true;
@@ -49,7 +49,7 @@ AnnoyingForm::fractalTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 		case 3:
 			BackColor = Color::Green;
 			break;
-		case 4:
+		default:
 			BackColor = Color::Blue;
 			newCtr = 0;
 			break;
@@ -63,14 +63,41 @@ AnnoyingForm::fractalTimer_Tick(System::Object^  sender, System::EventArgs^  e)
 	else if (state == SHOW_PIXELS)
 	{
 		System::Drawing::Graphics ^ g = this->CreateGraphics();
-		System::Drawing::Graphics ^ bmg = Graphics::FromImage(this->fractalBitmap);
+//		System::Drawing::Graphics ^ bmg = Graphics::FromImage(this->fractalBitmap);
+//		g->DrawPolygon(Pens::Red, cli::array<system::drawing::point,1> ^ points);
 
-		for (int ctr = 0; ctr < 1000; ctr++)
+#if 0
+		for (int ctr = 0; ctr < 30000; ctr++)
 		{
-		Color newColor = Color::FromArgb(rand->Next(255), rand->Next(255), rand->Next(255));
-		this->fractalBitmap->SetPixel(rand->Next(this->Width), rand->Next(this->Height), newColor);
-//		g->DrawLine(Pens::Red, 10, 10, 11, 11);
+			Color newColor;
+			if ((colorCounter & 7) == 0)
+				newColor = Color::FromArgb(rand->Next(255), rand->Next(255), rand->Next(255));
+			else
+				newColor = Color::Black;
+			colorCounter ++;
+			this->fractalBitmap->SetPixel(rand->Next(this->Width), rand->Next(this->Height), newColor);
 		}
 		g->DrawImage(this->fractalBitmap, 0, 0);
+#else
+		this->SuspendLayout();
+		for (int ctr = 0; ctr < 1000; ctr++)
+		{
+			int x = rand->Next(this->Width);
+			int y = rand->Next(this->Height);
+#if 0
+			System::Drawing::Brush ^ br =
+				gcnew System::Drawing::SolidBrush(
+				    Color::FromArgb(
+					    rand->Next(255), rand->Next(255), rand->Next(255)));
+			g->FillRectangle(br, x, y, 1, 1);
+#else
+			System::Drawing::SolidBrush  br(Color::FromArgb(
+			    rand->Next(255), rand->Next(255), rand->Next(255)));
+			g->FillRectangle(%br, x, y, 1, 1);
+#endif
+		}
+		this->ResumeLayout(false);
+#endif
+
 	}
 }

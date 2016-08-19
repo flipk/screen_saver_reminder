@@ -30,4 +30,26 @@ http://msdn.microsoft.com/en-us/library/system.drawing.color(VS.110).aspx
 System::Random
 https://msdn.microsoft.com/en-us/library/system.random(v=vs.110).aspx
 
+System.Windows.Controls
+https://msdn.microsoft.com/en-us/library/system.windows.controls(v=vs.110).aspx
+
+System.Windows.Forms
+https://msdn.microsoft.com/en-us/library/system.windows.forms(v=vs.110).aspx
+
+System.Windows.Forms.PictureBox
+https://msdn.microsoft.com/en-us/library/system.windows.forms.picturebox(v=vs.110).aspx
+
+pictureBox1.Image = someBitmap;
+
+question: if you then do SetPixel on that bitmap, does it update the pictureBox automatically?
+does it require pictureBox1.Refresh() to be called? probably not
+or how about pictureBox1.Update() ? probably not
+
+SolidBrush is a type of Brush
+https://msdn.microsoft.com/en-us/library/system.drawing.solidbrush(v=vs.110).aspx
+
+FillRectangle(aBrush, x, y, 1, 1);
+https://msdn.microsoft.com/en-us/library/system.drawing.graphics.fillrectangle(v=vs.110).aspx
+
 Random rand1 = new Random();
+int newValue = rand1->Next(255);
